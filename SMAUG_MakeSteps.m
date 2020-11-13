@@ -26,7 +26,11 @@ elseif isempty(Params.TrackFile)&&~isempty(Params.TrackFileLoc) %open all the an
     TrFileName = cellfun(@(x)[Params.TrackFileLoc,filesep, x],TrFileName,'uniformoutput',false);
     [dlocs,dnames,dexts]=cellfun(@fileparts,TrFileName,'uniformoutput',false); 
 else
-    TrFileName={'manual input'};
+    TrFileName = Params.TrackFile;
+    if ~iscell(TrFileName)
+        TrFileName={TrFileName};
+    end
+    [dlocs,dnames,dexts]=cellfun(@fileparts,TrFileName,'uniformoutput',false);
 end
 
 
