@@ -56,8 +56,12 @@ if nargin>1&&rem(nargin,2)==0
     for ii=1:2:nargin-1
         whichField = strcmp(fNames,varargin{ii});
         if all(~whichField)
-            warning(['Check spelling. ', ...
-                'Parameter change may have not occurred'])
+            warning(['Check spelling. "%s" is not a valid parameter'], varargin{ii})
+            return
+        end
+        if strcmp(varargin{ii}, 'TrackFile') & ~exist(varargin{ii+1})
+            warning('Trajectory file "%s" does not exist.',varargin{ii+1})
+            return
         end
         eval([fNames{whichField} ' = varargin{ii+1};'])
         eval(['Params.' fNames{whichField} ' = ' fNames{whichField},';'])
