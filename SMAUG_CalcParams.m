@@ -51,7 +51,7 @@ for ii=1:max(Sample.l)
     end
 end
 %used to calculate allowable transitions 
-T2=padarray(Sample.TM,[1,1],0,'post');
+T2=[[Sample.TM zeros(size(Sample.TM,1),1)]; zeros(1,size(Sample.TM,2)+1)];%padarray(Sample.TM,[1,1],0,'post');
 for jj=1:length(Sample.Beta)
     AllowedTrans(jj,:)=drchrnd((T2(jj,:)+(Sample.Alpha*Sample.Beta)),1);
 end
